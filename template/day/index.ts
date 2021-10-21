@@ -4,10 +4,10 @@ import { getEnabledParts, runAndTime } from "../../utils/utils.ts";
 const [partOneEnabled, partTwoEnabled] = getEnabledParts()
 const input = await Deno.readTextFile(Deno.args[1])
 
-const partOne = (input: string): number => {
+const partOne = (i: string): number => {
     return 0
 }
-const partTwo = (input: string): number => {
+const partTwo = (i: string): number => {
     return 0
 }
 
