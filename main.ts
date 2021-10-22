@@ -5,7 +5,7 @@ import Ask from "https://deno.land/x/ask@1.0.6/mod.ts";
 
 const ask = new Ask()
 
-const { y, d, p } = parse(Deno.args);
+const { y, d, p, t } = parse(Deno.args);
 
 const puzzlePath = `./${y}/day_${d}/`
 const scriptPath = puzzlePath + 'index.ts'
@@ -35,7 +35,10 @@ if (!scriptPathExists || !inputPathExists) {
 
 const cmd = ['deno', 'run', '--allow-read', scriptPath, '-i', inputPath]
 
-if (p) cmd.push('-p', p)
+const bothParts = Array.isArray(p) || p === true
+if (p === 1 || bothParts) cmd.push('-p1')
+if (p === 2 || bothParts) cmd.push('-p2')
+if (t) cmd.push('-t')
 
 const puzzle = Deno.run({ cmd })
 
