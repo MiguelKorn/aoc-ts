@@ -1,5 +1,5 @@
 import { parse } from "https://deno.land/std@0.112.0/flags/mod.ts";
-import { exists, ensureFile, copy, ensureDir } from "https://deno.land/std@0.112.0/fs/mod.ts";
+import { exists, copy, ensureDir } from "https://deno.land/std@0.112.0/fs/mod.ts";
 import * as log from "https://deno.land/std@0.112.0/log/mod.ts";
 import Ask from "https://deno.land/x/ask@1.0.6/mod.ts";
 
