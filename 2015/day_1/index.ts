@@ -12,7 +12,7 @@ const partTwo = (i: string): number => {
     let p = 0, r = 0;
     for (let k = 0; k < j.length; k++) {
         p += j[k] === '(' ? 1 : -1;
-        if(p === -1) {
+        if (p === -1) {
             r = k
             break;
         }
@@ -22,26 +22,23 @@ const partTwo = (i: string): number => {
 
 // --- Tests
 
-const testPartOne = <T>(cb: (input: string) => T) => {
-    assertEquals(0, cb('(())'))
-    assertEquals(0, cb('()()'))
-    assertEquals(3, cb('((('))
-    assertEquals(3, cb('(()(()('))
-    assertEquals(3, cb('))((((('))
-    assertEquals(-1, cb('())'))
-    assertEquals(-1, cb('))('))
-    assertEquals(-1, cb('))('))
-    assertEquals(-3, cb(')))'))
-    assertEquals(-3, cb(')())())'))
-}
+partOneEnabled && testsEnabled && (() => {
+    assertEquals(partOne('(())'), 0)
+    assertEquals(partOne('()()'), 0)
+    assertEquals(partOne('((('), 3)
+    assertEquals(partOne('(()(()('), 3)
+    assertEquals(partOne('))((((('), 3)
+    assertEquals(partOne('())'), -1)
+    assertEquals(partOne('))('), -1)
+    assertEquals(partOne('))('), -1)
+    assertEquals(partOne(')))'), -3)
+    assertEquals(partOne(')())())'), -3)
+})()
 
-const testPartTwo = <T>(cb: (input: string) => T) => {
-    assertEquals(1, cb(')'))
-    assertEquals(5, cb('()())'))
-}
-
-partOneEnabled && testsEnabled && testPartOne((i) => partOne(i))
-partTwoEnabled && testsEnabled && testPartTwo((i) => partTwo(i))
+partTwoEnabled && testsEnabled && (() => {
+    assertEquals(partTwo(')'), 1)
+    assertEquals(partTwo('()())'), 5)
+})()
 
 // --- End Tests
 

@@ -36,21 +36,18 @@ const partTwo = (i: string): number => {
 
 // --- Tests
 
-const testPartOne = <T>(cb: (input: string) => T) => {
-    assertEquals(M * M, cb('turn on 0,0 through 999,999'))
-    assertEquals(0, cb('toggle 0,0 through 999,0'))
-    assertEquals(0, cb('turn off 499,499 through 500,500'))
-    assertEquals(0, cb('turn on 0,0 through 999,999\ntoggle 0,0 through 999,0'))
-    assertEquals(4, cb('toggle 499,499 through 500,500'))
-}
+partOneEnabled && testsEnabled && (() => {
+    assertEquals(partOne('turn on 0,0 through 999,999'), M * M)
+    assertEquals(partOne('toggle 0,0 through 999,0'), 0)
+    assertEquals(partOne('turn off 499,499 through 500,500'), 0)
+    assertEquals(partOne('turn on 0,0 through 999,999\ntoggle 0,0 through 999,0'), 0)
+    assertEquals(partOne('toggle 499,499 through 500,500'), 4)
+})()
 
-const testPartTwo = <T>(cb: (input: string) => T) => {
-    assertEquals(1, cb('turn on 0,0 through 0,0'))
-    assertEquals(2000000, cb('toggle 0,0 through 999,999'))
-}
-
-partOneEnabled && testsEnabled && testPartOne((i) => partOne(i))
-partTwoEnabled && testsEnabled && testPartTwo((i) => partTwo(i))
+partTwoEnabled && testsEnabled && (() => {
+    assertEquals(partTwo('turn on 0,0 through 0,0'), 1)
+    assertEquals(partTwo('toggle 0,0 through 999,999'), 2000000)
+})()
 
 // --- End Tests
 

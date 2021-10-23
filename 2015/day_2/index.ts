@@ -22,18 +22,15 @@ const partTwo = (input: string): number => {
 
 // --- Tests
 
-const testPartOne = <T>(cb: (input: string) => T) => {
-    assertEquals(58, cb('2x3x4'))
-    assertEquals(43, cb('1x1x10'))
-}
+partOneEnabled && testsEnabled && (() => {
+    assertEquals(partOne('2x3x4'), 58)
+    assertEquals(partOne('1x1x10'), 43)
+})()
 
-const testPartTwo = <T>(cb: (input: string) => T) => {
-    assertEquals(34, cb('2x3x4'))
-    assertEquals(14, cb('1x1x10'))
-}
-
-partOneEnabled && testsEnabled && testPartOne((i) => partOne(i))
-partTwoEnabled && testsEnabled && testPartTwo((i) => partTwo(i))
+partTwoEnabled && testsEnabled && (() => {
+    assertEquals(partTwo('2x3x4'), 34)
+    assertEquals(partTwo('1x1x10'), 14)
+})()
 
 // --- End Tests
 

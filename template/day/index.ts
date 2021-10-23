@@ -13,16 +13,13 @@ const partTwo = (i: string): number => {
 
 // --- Tests
 
-const testPartOne = <T>(cb: (input: string) => T) => {
-    assertEquals(0, cb(''))
-}
+partOneEnabled && testsEnabled && (() => {
+    assertEquals(partOne(''), 0)
+})()
 
-const testPartTwo = <T>(cb: (input: string) => T) => {
-    assertEquals(0, cb(''))
-}
-
-partOneEnabled && testsEnabled && testPartOne((i) => partOne(i))
-partTwoEnabled && testsEnabled && testPartTwo((i) => partTwo(i))
+partTwoEnabled && testsEnabled && (() => {
+    assertEquals(partTwo(''), 0)
+})()
 
 // --- End Tests
 

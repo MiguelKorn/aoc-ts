@@ -23,20 +23,17 @@ const partTwo = (i: string): number => {
 
 // --- Tests
 
-const testPartOne = <T>(cb: (input: string) => T) => {
-    assertEquals(2, cb('>'))
-    assertEquals(4, cb('^>v<'))
-    assertEquals(2, cb('^v^v^v^v^v'))
-}
+partOneEnabled && testsEnabled && (() => {
+    assertEquals(partOne('>'), 2)
+    assertEquals(partOne('^>v<'), 4)
+    assertEquals(partOne('^v^v^v^v^v'), 2)
+})()
 
-const testPartTwo = <T>(cb: (input: string) => T) => {
-    assertEquals(3, cb('^>'))
-    assertEquals(3, cb('^>v<'))
-    assertEquals(11, cb('^v^v^v^v^v'))
-}
-
-partOneEnabled && testsEnabled && testPartOne((i) => partOne(i))
-partTwoEnabled && testsEnabled && testPartTwo((i) => partTwo(i))
+partTwoEnabled && testsEnabled && (() => {
+    assertEquals(partTwo('^>'), 3)
+    assertEquals(partTwo('^>v<'), 3)
+    assertEquals(partTwo('^v^v^v^v^v'), 11)
+})()
 
 // --- End Tests
 

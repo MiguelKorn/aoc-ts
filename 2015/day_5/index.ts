@@ -13,30 +13,27 @@ const partOne = (i: string): number => {
 }
 const partTwo = (i: string): number => {
     return i.split('\n').filter(s => {
-        if(!/(\w{2}).*?(\1)/g.test(s)) return false
+        if (!/(\w{2}).*?(\1)/g.test(s)) return false
         return s.split('').some((v, i, a) => i > 1 && a[i - 2] === v)
     }).length
 }
 
 // --- Tests
 
-const testPartOne = <T>(cb: (input: string) => T) => {
-    assertEquals(1, cb('ugknbfddgicrmopn'))
-    assertEquals(1, cb('aaa'))
-    assertEquals(0, cb('jchzalrnumimnmhp'))
-    assertEquals(0, cb('haegwjzuvuyypxyu'))
-    assertEquals(0, cb('dvszwmarrgswjxmb'))
-}
+partOneEnabled && testsEnabled && (() => {
+    assertEquals(partOne('ugknbfddgicrmopn'), 1)
+    assertEquals(partOne('aaa'), 1)
+    assertEquals(partOne('jchzalrnumimnmhp'), 0)
+    assertEquals(partOne('haegwjzuvuyypxyu'), 0)
+    assertEquals(partOne('dvszwmarrgswjxmb'), 0)
+})()
 
-const testPartTwo = <T>(cb: (input: string) => T) => {
-    assertEquals(1, cb('qjhvhtzxzqqjkmpb'))
-    assertEquals(1, cb('xxyxx'))
-    assertEquals(0, cb('uurcxstgmygtbstg'))
-    assertEquals(0, cb('ieodomkazucvgmuy'))
-}
-
-partOneEnabled && testsEnabled && testPartOne((i) => partOne(i))
-partTwoEnabled && testsEnabled && testPartTwo((i) => partTwo(i))
+partTwoEnabled && testsEnabled && (() => {
+    assertEquals(partTwo('qjhvhtzxzqqjkmpb'), 1)
+    assertEquals(partTwo('xxyxx'), 1)
+    assertEquals(partTwo('uurcxstgmygtbstg'), 0)
+    assertEquals(partTwo('ieodomkazucvgmuy'), 0)
+})()
 
 // --- End Tests
 
