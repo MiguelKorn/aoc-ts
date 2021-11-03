@@ -1,30 +1,8 @@
 import { assertEquals } from "https://deno.land/std@0.112.0/testing/asserts.ts";
-import { getEnabledParts, runAndTime } from "../../utils/utils.ts";
+import { createPermutations, getEnabledParts, runAndTime } from "../../utils/utils.ts";
 
 const [partOneEnabled, partTwoEnabled, testsEnabled] = getEnabledParts()
 const input = await Deno.readTextFile(Deno.args[1])
-
-// https://www.baeldung.com/cs/array-generate-all-permutations#quickperm-algorithm
-type CreatePermutations = (arr: string[]) => string[][]
-const createPermutations: CreatePermutations = (arr) => {
-    const permutations: string[][] = [[...arr]]
-    const N = arr.length;
-    const currentPerm: number[] = [...Array(N + 1).keys()]
-
-    let i = 1;
-    while (i < N) {
-        currentPerm[i] -= 1;
-        const j = (i % 2 == 1) ? currentPerm[i] : 0;
-        [arr[j], arr[i]] = [arr[i], arr[j]] // swap
-        permutations.push([...arr])
-        i = 1
-        while (currentPerm[i] == 0) {
-            currentPerm[i] = i++;
-        }
-    }
-
-    return permutations;
-}
 
 const partOne = (i: string): [min: number, max: number] => {
     const m = new Map();
