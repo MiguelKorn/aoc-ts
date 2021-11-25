@@ -14,9 +14,9 @@ export const runAndTime = <T = unknown>(label: string, cb: () => T): T => {
 }
 
 // https://www.baeldung.com/cs/array-generate-all-permutations#quickperm-algorithm
-type CreatePermutations = (arr: string[], partial?: boolean) => string[][]
+type CreatePermutations<T = string | number> = (arr: T[], partial?: boolean) => T[][]
 export const createPermutations: CreatePermutations = (arr, partial = false) => {
-    const permutations: string[][] = [[...arr]]
+    const permutations = [[...arr]]
     const N = arr.length - (partial ? 1 : 0);
     const currentPerm: number[] = [...Array(N + 1).keys()]
 
