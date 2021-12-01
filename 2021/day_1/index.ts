@@ -11,10 +11,7 @@ const partOne = (i: string): number => {
 }
 const partTwo = (i: string): number => {
     return i.split('\n').map(Number).reduce((sum, val, idx, arr) => {
-        const sharedSum = arr[idx - 2] + arr[idx - 1];
-        const prevSum = sharedSum + arr[idx - 3];
-        const currentSum = sharedSum + val;
-        return sum + (idx > 2 && currentSum > prevSum ? 1 : 0);
+        return sum + (idx > 2 && val > arr[idx - 3] ? 1 : 0);
     }, 0)
 }
 
