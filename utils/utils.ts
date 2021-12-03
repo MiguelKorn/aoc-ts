@@ -13,6 +13,10 @@ export const runAndTime = <T = unknown>(label: string, cb: () => T): T => {
     return result
 }
 
+export const createGrid = (cols: number, rows: number = cols, fill: any = 0) => Array(cols).fill(null).map(() => Array(rows).fill(fill))
+
+export const range = (start: number, end: number) => Array.from({ length: end - start }, (_, i) => start + i)
+
 // https://www.baeldung.com/cs/array-generate-all-permutations#quickperm-algorithm
 type CreatePermutations<T = string | number> = (arr: T[], partial?: boolean) => T[][]
 export const createPermutations: CreatePermutations = (arr, partial = false) => {
