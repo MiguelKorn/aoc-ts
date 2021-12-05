@@ -1,8 +1,8 @@
 import { assertEquals } from "https://deno.land/std@0.112.0/testing/asserts.ts";
-import { getEnabledParts, runAndTime } from "../../utils/utils.ts";
+import { getEnabledParts, getInput, runAndTime } from "../../utils/utils.ts";
 
 const [partOneEnabled, partTwoEnabled, testsEnabled] = getEnabledParts()
-const input = await Deno.readTextFile(Deno.args[1])
+const [input, input2] = await getInput()
 
 const getMostCommon = (numbers: number[][], position: number) => numbers.reduce((a, n) => a + n[position], 0) >= numbers.length / 2 ? 1 : 0
 const filterPositionAndValue = (numbers: number[][], position: number, value: number) => numbers.filter(n => n[position] === value)
@@ -56,4 +56,4 @@ partTwoEnabled && testsEnabled && (() => {
 // --- End Tests
 
 partOneEnabled && runAndTime('partOne', () => partOne(input))
-partTwoEnabled && runAndTime('partTwo', () => partTwo(input))
+partTwoEnabled && runAndTime('partTwo', () => partTwo(input2))

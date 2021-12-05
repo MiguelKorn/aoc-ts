@@ -1,8 +1,8 @@
 import { assertEquals } from "https://deno.land/std@0.112.0/testing/asserts.ts";
-import { getEnabledParts, runAndTime } from "../../utils/utils.ts";
+import { getEnabledParts, getInput, runAndTime } from "../../utils/utils.ts";
 
 const [partOneEnabled, partTwoEnabled, testsEnabled] = getEnabledParts()
-const input = await Deno.readTextFile(Deno.args[1])
+const [input, input2] = await getInput()
 
 const requirementOne = (i: string): boolean => i.split('').map(c => c.charCodeAt(0)).some((c, i, a) => !((a[i + 1] - 1 ^ c) | (a[i + 2] - 2 ^ c)))
 const requirementTwo = (i: string): boolean => !/[iol]/.test(i)
@@ -47,4 +47,4 @@ partTwoEnabled && testsEnabled && (() => {
 // --- End Tests
 
 partOneEnabled && runAndTime('partOne', () => partOne(input))
-partTwoEnabled && runAndTime('partTwo', () => partTwo(input))
+partTwoEnabled && runAndTime('partTwo', () => partTwo(input2))

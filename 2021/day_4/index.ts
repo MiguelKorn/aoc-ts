@@ -1,8 +1,8 @@
 import { assertEquals } from "https://deno.land/std@0.112.0/testing/asserts.ts";
-import { getEnabledParts, runAndTime } from "../../utils/utils.ts";
+import { getEnabledParts, getInput, runAndTime } from "../../utils/utils.ts";
 
 const [partOneEnabled, partTwoEnabled, testsEnabled] = getEnabledParts()
-const input = await Deno.readTextFile(Deno.args[1])
+const [input, input2] = await getInput()
 
 const parseInput = (input: string) => input.split("\n\n").map((s, i) => i > 0 ? parseBoard(s) : s.split(',').map(Number)) as [number[], number[][]]
 const parseBoard = (rawBoard: string) => rawBoard.split('\n').map(b => b.match(/\d+/g)!.map(Number))
@@ -92,4 +92,4 @@ partTwoEnabled && testsEnabled && (() => {
 // --- End Tests
 
 partOneEnabled && runAndTime('partOne', () => partOne(input))
-partTwoEnabled && runAndTime('partTwo', () => partTwo(input))
+partTwoEnabled && runAndTime('partTwo', () => partTwo(input2))
