@@ -43,3 +43,26 @@ export const createPermutations: CreatePermutations = (arr, partial = false) => 
 
     return permutations;
 }
+
+/**
+ * Floodfill algorithm
+ * Returns amount of adjacent cells
+ * @param x row position
+ * @param y column position
+ * @param grid grid to search
+ * @param marker marker to mark done cells
+ * @param low lowest number to stop at
+ * @param high highest number to stop at
+ */
+export const floodfill = (x: number, y: number, grid: number[][], marker: number, low: number = -1, high: number = marker ): number => {
+    if (x < 0 || x >= grid.length || y < 0 || y >= grid[0].length || grid[x][y] === high || grid[x][y] === low) {
+        return 0
+    }
+    grid[x][y] = marker
+    return 1 + [
+        floodfill(x - 1, y, grid, marker, high, low),
+        floodfill(x + 1, y, grid, marker, high, low),
+        floodfill(x, y - 1, grid, marker, high, low),
+        floodfill(x, y + 1, grid, marker, high, low)
+    ].reduce((a, b) => a + b, 0)
+}
