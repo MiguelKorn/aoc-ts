@@ -1,5 +1,5 @@
 import { assertEquals } from "https://deno.land/std@0.112.0/testing/asserts.ts";
-import { floodfill, getEnabledParts, getInput, runAndTime } from "../../utils/utils.ts";
+import { floodFill, getEnabledParts, getInput, runAndTime } from "../../utils/utils.ts";
 
 const [partOneEnabled, partTwoEnabled, testsEnabled] = getEnabledParts()
 const [input, input2] = await getInput()
@@ -38,7 +38,7 @@ const partTwo = (i: string): number => {
 
     m.forEach((row, x) => {
         row.forEach((col, y) => {
-            b.push(floodfill(x, y, m, 9))
+            b.push(floodFill(x, y, m, 9))
         })
     })
 

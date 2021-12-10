@@ -1,3 +1,4 @@
+// ----- Start Helper Methods -----
 type EnabledPartsReturn = [partOneEnabled: boolean, partTwoEnabled: boolean, testsEnabled: boolean]
 export const getEnabledParts = (): EnabledPartsReturn => ([
     Deno.args.includes('-p1'),
@@ -17,6 +18,7 @@ export const getInput = async () => {
     const i = await Deno.readTextFile(Deno.args[1])
     return [i, Deno.args.includes('-i2') ? await Deno.readTextFile(Deno.args[3]) : i]
 }
+// ----- End Helper Methods -----
 
 export const createGrid = (cols: number, rows: number = cols, fill: any = 0) => Array(cols).fill(null).map(() => Array(rows).fill(fill))
 
@@ -54,15 +56,23 @@ export const createPermutations: CreatePermutations = (arr, partial = false) => 
  * @param low lowest number to stop at
  * @param high highest number to stop at
  */
-export const floodfill = (x: number, y: number, grid: number[][], marker: number, low: number = -1, high: number = marker ): number => {
+export const floodFill = (x: number, y: number, grid: number[][], marker: number, low: number = -1, high: number = marker): number => {
     if (x < 0 || x >= grid.length || y < 0 || y >= grid[0].length || grid[x][y] === high || grid[x][y] === low) {
         return 0
     }
     grid[x][y] = marker
     return 1 + [
-        floodfill(x - 1, y, grid, marker, high, low),
-        floodfill(x + 1, y, grid, marker, high, low),
-        floodfill(x, y - 1, grid, marker, high, low),
-        floodfill(x, y + 1, grid, marker, high, low)
+        floodFill(x - 1, y, grid, marker, high, low),
+        floodFill(x + 1, y, grid, marker, high, low),
+        floodFill(x, y - 1, grid, marker, high, low),
+        floodFill(x, y + 1, grid, marker, high, low)
     ].reduce((a, b) => a + b, 0)
+}
+
+export const pairWise = <T>(array: T[], cb: (a: T, b: T) => number, skips = 1) => {
+    const result = []
+    for (let i = 0; i < array.length - skips; i++) {
+        result.push(cb(array[i], array[i + skips]))
+    }
+    return result
 }
