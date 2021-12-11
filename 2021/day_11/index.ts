@@ -1,5 +1,5 @@
 import { assertEquals } from "https://deno.land/std@0.112.0/testing/asserts.ts";
-import { getEnabledParts, getInput, range, runAndTime } from "../../utils/utils.ts";
+import { getEnabledParts, getInput, runAndTime } from "../../utils/utils.ts";
 
 const [partOneEnabled, partTwoEnabled, testsEnabled] = getEnabledParts()
 const [input, input2] = await getInput()
@@ -13,7 +13,6 @@ const partOne = (i: string, steps: number = 100): number => {
         m[x][y]++
         if (m[x][y] == 10) {
             f++;
-
             countFlash(x, y - 1);
             countFlash(x, y + 1);
             countFlash(x - 1, y);
