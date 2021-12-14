@@ -69,10 +69,10 @@ export const floodFill = (x: number, y: number, grid: number[][], marker: number
     ].reduce((a, b) => a + b, 0)
 }
 
-export const pairWise = <T>(array: T[], cb: (a: T, b: T) => number, skips = 1) => {
+export const pairWise = <T>(array: T[], cb: (a: T, b: T, i:number) => any, skips = 1) => {
     const result = []
     for (let i = 0; i < array.length - skips; i++) {
-        result.push(cb(array[i], array[i + skips]))
+        result.push(cb(array[i], array[i + skips], i))
     }
     return result
 }
