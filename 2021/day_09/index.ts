@@ -1,32 +1,15 @@
 import { assertEquals } from "https://deno.land/std@0.112.0/testing/asserts.ts";
-import { floodFill, getEnabledParts, getInput, runAndTime } from "../../utils/utils.ts";
+import { floodFill, getEnabledParts, getInput, getNeighbours, runAndTime } from "../../utils/utils.ts";
 
 const [partOneEnabled, partTwoEnabled, testsEnabled] = getEnabledParts()
 const [input, input2] = await getInput()
 
-const lowerThanNeighbors = (x: number, y: number, grid: number[][]) => {
-    const neighbors: { [key: string]: number[] } = {
-        t: [x - 1, y],
-        b: [x + 1, y],
-        l: [x, y - 1],
-        r: [x, y + 1],
-    }
-
-    if (x === 0) delete neighbors.t
-    if (x === grid.length) delete neighbors.b
-    if (y === 0) delete neighbors.l
-    if (y === grid[0].length - 1) delete neighbors.r
-
-    if(Object.values(neighbors).length === 0) return false
-    return Object.values(neighbors).every(([nx, ny]) => grid[nx][ny] > grid[x][y])
-}
-
 const partOne = (i: string): number => {
     const m = i.split('\n').map(l => l.split('').map(Number))
     let p: number[] = [];
-    m.forEach((row, x) => {
-            row.forEach((n, y) => {
-                if (lowerThanNeighbors(x, y, m)) p.push(n)
+    m.forEach((row, y) => {
+            row.forEach((c, x) => {
+                if (getNeighbours(m, x, y).every(n => c < n)) p.push(c)
             })
         }
     )

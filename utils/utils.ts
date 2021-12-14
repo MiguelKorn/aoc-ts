@@ -85,7 +85,7 @@ export function* subsetSum(numbers: number[], target: number, length: number = -
     }
 }
 
-export const getNeighbours = (grid: string[][], x: number, y: number, diagonal = false, side = true): string[] => {
+export const getNeighbours = <T>(grid: T[][], x: number, y: number, diagonal = false, side = true): T[] => {
     const neighbours = []
     const sides = [[0, -1], [1, 0], [0, 1], [-1, 0],]
     const diagonals = [[1, -1], [1, 1], [-1, 1], [-1, -1]]
