@@ -69,7 +69,7 @@ export const floodFill = (x: number, y: number, grid: number[][], marker: number
     ].reduce((a, b) => a + b, 0)
 }
 
-export const pairWise = <T>(array: T[], cb: (a: T, b: T, i:number) => any, skips = 1) => {
+export const pairWise = <T>(array: T[], cb: (a: T, b: T, i: number) => any, skips = 1) => {
     const result = []
     for (let i = 0; i < array.length - skips; i++) {
         result.push(cb(array[i], array[i + skips], i))
@@ -83,4 +83,20 @@ export function* subsetSum(numbers: number[], target: number, length: number = -
     for (const [i, n] of numbers.entries()) {
         yield* subsetSum(numbers.slice(i + 1), target, length, partial.concat(n), partialSum + n)
     }
+}
+
+export const getNeighbours = (grid: string[][], x: number, y: number, diagonal = false, side = true): string[] => {
+    const neighbours = []
+    const sides = [[0, -1], [1, 0], [0, 1], [-1, 0],]
+    const diagonals = [[1, -1], [1, 1], [-1, 1], [-1, -1]]
+    const both = [[-1, -1], [0, -1], [1, -1], [1, 0], [1, 1], [0, 1], [-1, 1], [-1, 0]]
+    const directions = diagonal ? side ? both : diagonals : sides
+    for (const [dx, dy] of directions) {
+        const nx = x + dx
+        const ny = y + dy
+        if (nx >= 0 && nx < grid[0].length && ny >= 0 && ny < grid.length) {
+            neighbours.push(grid[ny][nx])
+        }
+    }
+    return neighbours
 }
