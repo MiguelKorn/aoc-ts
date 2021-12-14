@@ -1,5 +1,5 @@
 import { assertEquals } from "https://deno.land/std@0.112.0/testing/asserts.ts";
-import { createPermutations, getEnabledParts, runAndTime } from "../../utils/utils.ts";
+import { createPermutations, getEnabledParts, getInput, runAndTime } from "../../utils/utils.ts";
 
 const [partOneEnabled, partTwoEnabled, testsEnabled] = getEnabledParts()
 const [input, input2] = await getInput()
