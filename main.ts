@@ -4,10 +4,8 @@ import * as log from "https://deno.land/std@0.112.0/log/mod.ts";
 import Ask from "https://deno.land/x/ask@1.0.6/mod.ts";
 
 const ask = new Ask()
-
 const { y, d, p, t, i } = parse(Deno.args);
-
-const puzzlePath = `./${y}/day_${d}/`
+const puzzlePath = `./${y}/day_${(d < 10 && "0") + d}/`
 const scriptPath = puzzlePath + 'index.ts'
 const inputPath = puzzlePath + 'input.txt'
 const inputPath2 = puzzlePath + 'input2.txt'
