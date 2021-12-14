@@ -1,16 +1,8 @@
 import { assertEquals } from "https://deno.land/std@0.112.0/testing/asserts.ts";
-import { createPermutations, getEnabledParts, getInput, runAndTime } from "../../utils/utils.ts";
+import { createPermutations, getEnabledParts, getInput, runAndTime, subsetSum } from "../../utils/utils.ts";
 
 const [partOneEnabled, partTwoEnabled, testsEnabled] = getEnabledParts()
 const [input, input2] = await getInput()
-
-function* subsetSum(numbers: number[], target: number, length: number, partial: number[] = [], partialSum: number = 0): IterableIterator<number[]> {
-    if (partialSum === target && partial.length === length) yield partial;
-    if (partialSum >= target || partial.length >= length) return;
-    for (const [i, n] of numbers.entries()) {
-        yield* subsetSum(numbers.slice(i + 1), target, length, partial.concat(n), partialSum + n)
-    }
-}
 
 type Ingredient = {
     capacity: number,

@@ -76,3 +76,11 @@ export const pairWise = <T>(array: T[], cb: (a: T, b: T, i:number) => any, skips
     }
     return result
 }
+
+export function* subsetSum(numbers: number[], target: number, length: number = -1, partial: number[] = [], partialSum: number = 0): IterableIterator<number[]> {
+    if (partialSum === target && (length === -1 ? true : partial.length === length)) yield partial;
+    if (partialSum >= target || (length !== -1 && partial.length >= length)) return;
+    for (const [i, n] of numbers.entries()) {
+        yield* subsetSum(numbers.slice(i + 1), target, length, partial.concat(n), partialSum + n)
+    }
+}
