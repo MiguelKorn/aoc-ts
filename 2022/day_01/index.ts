@@ -1,19 +1,20 @@
-import { assertEquals } from "https://deno.land/std@0.112.0/testing/asserts.ts";
-import { getEnabledParts, getInput, runAndTime } from "../../utils/utils.ts";
+import {assertEquals} from "https://deno.land/std@0.112.0/testing/asserts.ts";
+import {getEnabledParts, getInput, runAndTime} from "../../utils/utils.ts";
 
 const [partOneEnabled, partTwoEnabled, testsEnabled] = getEnabledParts()
 const [input, input2] = await getInput()
 
 const partOne = (i: string): number => {
-    const l = i.split("\n\n")
-    const x = l.map(n => n.split("\n").map(Number).reduce((a,b)=>a+b, 0))
-    return x.sort((a,b)=> b-a)[0]
+    const elves = i.split("\n\n")
+    const totals = elves.map(n => n.split("\n").reduce((a, b) => a + Number(b), 0))
+    const sorted = totals.sort((a, b) => b - a)
+    return sorted[0]
 }
 const partTwo = (i: string): number => {
-    const l = i.split("\n\n")
-    const x = l.map(n => n.split("\n").map(Number).reduce((a,b)=>a+b, 0))
-    const [a,b,c] = x.sort((a,b)=> b-a)
-    return a+b+c
+    const elves = i.split("\n\n")
+    const totals = elves.map(n => n.split("\n").reduce((a, b) => a + Number(b), 0))
+    const [a, b, c] = totals.sort((a, b) => b - a)
+    return a + b + c
 }
 
 // --- Tests
