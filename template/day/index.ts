@@ -13,12 +13,14 @@ const partTwo = (i: string): number => {
 
 // --- Tests
 
+const testInput = ``
+
 partOneEnabled && testsEnabled && (() => {
-    assertEquals(partOne(''), 0)
+    assertEquals(partOne(testInput), 0)
 })()
 
 partTwoEnabled && testsEnabled && (() => {
-    assertEquals(partTwo(''), 0)
+    assertEquals(partTwo(testInput), 0)
 })()
 
 // --- End Tests
