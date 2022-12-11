@@ -44,7 +44,7 @@ const solve = (i: string, rounds = 20, divide = true) => {
             const {items, newItem, divisibleBy, ifTrue, ifFalse} = monkeys[k]
             while (items.length > 0) {
                 const value = newItem(items.shift()!)
-                let newValue = value >= lcm ? value % lcm : value
+                let newValue = value % lcm
                 if (divide) newValue = Math.floor(newValue / 3)
                 const newMonkey = newValue % divisibleBy === 0 ? ifTrue : ifFalse
                 monkeys[newMonkey].items.push(newValue)
