@@ -27,7 +27,7 @@ export const getLeastCommonMultiple = (numbers: Array<number>): number => {
     return numbers.reduce((a, b) => lcm(a, b))
 }
 
-export const createGrid = (cols: number, rows: number = cols, fill: any = 0) => Array(cols).fill(null).map(() => Array(rows).fill(fill))
+export const createGrid = (rows: number, cols: number = rows, fill: any = 0) => Array(cols).fill(null).map(() => Array(rows).fill(fill))
 
 export const range = (start: number, end: number): Array<number> => Array.from({ length: end - start }, (_, i) => start + i)
 
